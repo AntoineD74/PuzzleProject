@@ -1,19 +1,33 @@
-<div class="container">
+<div class="container content">
+  <div class=" w3-border w3-hover-border-orange w3-round-xlarge w3-animate-bottom margin-160">
 
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Veuillez vous connecter</h2>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Mot de passe</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-    <div class="checkbox">
-      <label>
-            <input type="checkbox" value="remember-me"> Se souvenir de moi
-          </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
-  </form>
-  <p class="text-center">
-    Vous n'avez pas de compte ? <a href="signup">Inscrivez-vous</a>
-  </p>
+    <form class="form-signin">
+      <h2 class="form-signin-heading">Veuillez vous connecter</h2>
+      <br/>
+      <label for="inputEmail" class="sr-only">Email</label>
+      <input type="email" name="email" [(ngModel)]="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+      <label for="inputPassword" class="sr-only">Mot de passe</label>
+      <input type="password" name="password" [(ngModel)]="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+      <!--
+      <div class="checkbox">
+        <label>
+              <input type="checkbox" value="remember-me"> Se souvenir de moi
+            </label>
+      </div>
+      -->
+      <button (click)="onSubmit()" class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+    </form>
+    <p class="text-center">
+      Vous n'avez pas de compte ? <a href="signup">Inscrivez-vous</a>
+      <br />
+      <!--
+      <br />
+      Se connecter via
+      <br />
+      <button class="btn btn-outline-primary"><i class="fa fa-facebook fa-fw"></i></button>
+      <button class="btn btn-outline-primary"><i class="fa fa-twitter fa-fw"></i></button>
+      <button class="btn btn-outline-primary"><i class="fa fa-google-plus fa-fw"></i></button>
+    -->
+    </p>
+  </div>
 </div>

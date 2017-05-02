@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditorModule, SharedModule, GrowlModule, AccordionModule, MultiSelectModule, SelectButtonModule } from 'primeng/primeng';
 
 //Imports des composants perso
 import { AppRoutingModule }     from './app-routing.module';
@@ -19,6 +21,19 @@ import { ActusComponent } from './actus/actus.component';
 import { ActuOverviewComponent } from './actu-overview/actu-overview.component';
 import { ActuCreateComponent } from './actu-create/actu-create.component';
 
+import { AuthenticationService } from './authentication.service';
+import { UsersService } from './users.service';
+import { GrowlMessagesService } from './growl-messages.service';
+import { AdminService } from './admin.service';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAssociationsComponent } from './admin-associations/admin-associations.component';
+import { FailedAuthComponent } from './failed-auth/failed-auth.component';
+import { AssociationCreateComponent } from './association-create/association-create.component';
+import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.component';
+
+
 //Déclaration du module
 @NgModule({
   declarations: [
@@ -32,16 +47,38 @@ import { ActuCreateComponent } from './actu-create/actu-create.component';
     ProjectOverviewComponent,
     ActusComponent,
     ActuOverviewComponent,
-    ActuCreateComponent
+    ActuCreateComponent,
+    MyProfileComponent,
+    ChangePasswordComponent,
+    AdminUsersComponent,
+    AdminAssociationsComponent,
+    FailedAuthComponent,
+    AssociationCreateComponent,
+    ComfirmDialogComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    EditorModule,
+    SharedModule,
+    GrowlModule,
+    AccordionModule,
+    MultiSelectModule,
+    SelectButtonModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    UsersService,
+    GrowlMessagesService,
+    AdminService
+  ],
+  entryComponents : [
+    ComfirmDialogComponent
+  ],
   bootstrap: [AppComponent]
 })
 

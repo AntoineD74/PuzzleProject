@@ -1,0 +1,98 @@
+<div class="content w3-animate-bottom">
+  <div class="container-fluid">
+    <h1>
+      Gestion des utilisateurs
+      <a href="/home" class="btn">
+        <i class="fa fa-home"></i>
+         Accueil
+      </a>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <p-accordion class="card filter">
+        <p-accordionTab header="Filtrer">
+          <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-4">
+                <label for="usernameFilter">Recherche par nom d'utilisateur</label>
+              </div>
+              <div class="col-md-6 w3-center">
+                <div class="input-group">
+                  <input name="usernameFilter" [(ngModel)]="usernameFilter" type="text" class="form-control" />
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-4">
+                <label for="rolesFilter">Filtrer par rôles</label>
+              </div>
+              <div class="col-md-6">
+                <p-multiSelect class="full-width" [options]="roles" [(ngModel)]="rolesFilter"></p-multiSelect>
+              </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <button (click)="filter()" class="btn btn-primary full-width"><i class="fa fa-search"></i> Rechercher</button>
+            </div>
+            <div class="col-md-6 ">
+              <button (click)="resetFilter()" class="btn btn-info full-width"><i class="fa fa-refresh"></i> Reset</button>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+
+      <hr />
+      <div *ngFor="let user of filteredUsers" class="card user-card w3-hover-border-orange w3-animate-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <img id="{{user.id}}" #image (error)="standby(image)" class="avatar-image rounded-circle w3-hover-border-orange" src="{{user.avatar}}" />
+          </div>
+          <div class="col-md-9">
+            <h2 class="w3-border-bottom w3-hover-border-orange">{{user.username}}</h2>
+            <div class="row">
+              <div class="col-md-3">
+                Nom
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{user.lastname}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Prénom
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{user.firstname}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Email
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{user.email}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Rôle
+              </div>
+              <div class="col-md-7 w3-border-left w3-hover-border-orange">
+                <p-selectButton [options]="roles" [(ngModel)]="user.role"></p-selectButton>
+              </div>
+              <div class="col-md-1">
+                <button (click)="setRole(user.id,user.role)" class="btn btn-primary"><i class="fa fa-save"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

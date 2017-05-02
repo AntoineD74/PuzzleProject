@@ -1,3 +1,301 @@
-<p>
-  project-create works!
-</p>
+<div class="content w3-animate-bottom">
+  <div class="container">
+    <h1>
+      Créer un projet
+      <button class="btn">
+        <i class="fa fa-chevron-left"></i> Retour
+      </button>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <form novalide #projectForm="ngForm">
+        <h2>
+          Informations générales
+        </h2>
+        <small class="form-text text-muted">
+          Les informations qui seront affichées dans le cadre miniature de votre projet.
+        </small>
+        <div
+          class="w3-padding w3-border w3-hover-border-orange
+          w3-round-xlarge w3-animate-bottom">
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !title.valid && !title.pristine,
+            'has-success' : title.valid
+          }">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="title">
+              Titre du projet*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <input id="title" pattern="[a-zA-Z0-9\-\.]{10,}" required name="title"
+                [(ngModel)]="project.title" type="text" placeholder="Titre du projet"
+                [ngClass]="{
+                  'form-control': true,
+                  'form-control-danger': !title.valid && !title.pristine,
+                  'form-control-success' : title.valid
+                }" #title="ngModel" />
+              <div *ngIf="!title.valid && !title.pristine"
+                class="form-control-feedback">
+                Titre invalide
+              </div>
+              <small id="titleHelp" class="form-text text-muted">
+                10 caractères minimum.
+              </small>
+            </div>
+
+
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !resume.valid && !resume.pristine,
+            'has-success' : resume.valid}">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="resume">
+              Résumé du projet*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <textarea id="resume" type="text" rows="2"
+                [ngClass]="{
+                  'form-control': true,
+                  'form-control-danger': !resume.valid && !resume.pristine,
+                  'form-control-success' : resume.valid
+                }" pattern="^.{10,200}$"
+                placeholder="Description du projet" required name="resume"
+                [(ngModel)]="project.resume" #resume="ngModel"></textarea>
+              <div *ngIf="!resume.valid && !resume.pristine"
+                class="form-control-feedback">
+                Résumé invalide
+              </div>
+              <small id="resumeHelp" class="form-text text-muted">
+                Décrivez rapidement les objectifs de votre projet. (200 caractères max)
+              </small>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !image.valid && !image.pristine,
+            'has-success' : image.valid
+          }">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="title">
+              Image du projet*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <input id="image" pattern="[a-zA-Z0-9\-\.]{10,}" required name="image"
+                [(ngModel)]="project.image" type="text" placeholder="Lien de l'image du projet"
+                [ngClass]="{
+                  'form-control': true,
+                  'form-control-danger': !image.valid && !image.pristine,
+                  'form-control-success' : image.valid
+                }" #image="ngModel" />
+              <div *ngIf="!image.valid && !image.pristine"
+                class="form-control-feedback">
+                Lien invalide
+              </div>
+              <small id="imageHelp" class="form-text text-muted">
+                http://...
+              </small>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !date.valid && !date.pristine,
+            'has-success' : date.valid}">
+            <div class="col-1"></div>
+            <label for="birthdate" class="col-md-2 col-sm-12 col-form-label">
+              Date désirée du projet*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <input [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': !date.valid && !date.pristine,
+                    'form-control-success' : date.valid
+                  }" ngbDatepicker #d="ngbDatepicker" required
+                  placeholder="Date estimée de réalisation du projet" id="date" name="date"
+                  [(ngModel)]="project.date" #date="ngModel">
+                <div class="input-group-addon" (click)="d.toggle()" >
+                  <i class="fa fa-calendar fa-fw"></i>
+                </div>
+              </div>
+              <small id="dateHelp" class="form-text text-muted">
+                Format américain (yyyy-mm-dd).
+              </small>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !goal.valid && !goal.pristine,
+            'has-success' : goal.valid}">
+            <div class="col-1"></div>
+            <label for="goal" class="col-md-2 col-sm-12 col-form-label">Objectif financier</label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <input [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': !goal.valid && !goal.pristine,
+                    'form-control-success' : goal.valid
+                  }" type="text" placeholder="Montant pour réaliser le projet"
+                  id="goal" name="goal" [(ngModel)]="project.goal" #goal="ngModel"
+                   pattern="^\d{1,10}$">
+                  <div class="input-group-addon">
+                    <i class="fa fa-fw fa-euro"></i>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !place.valid && !place.pristine,
+            'has-success' : place.valid
+          }">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="title">
+              Lieu du projet*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <input id="place" type="text"
+                required #place="ngModel" name="place"
+                [(ngModel)]="project.place"
+                [ngClass]="{
+                  'form-control': true,
+                  'form-control-danger': !place.valid && !place.pristine,
+                  'form-control-success' : place.valid
+                }"
+                placeholder="Lieu du projet" />
+                <div *ngIf="!place.valid && !place.pristine"
+                  class="form-control-feedback">
+                  Lieu invalide
+                </div>
+            </div>
+          </div>
+        </div>
+        <h2>
+          Présentation
+        </h2>
+        <small class="form-text text-muted">
+          Présenter le concept du projet, les objectifs, les moyens nécessaires pour le mener à bien ainsi que toute autre information que vous jugerez utile.
+        </small>
+        <div class="w3-padding w3-border w3-hover-border-orange w3-round-xlarge w3-animate-bottom">
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <p-editor class="col-md-10 col-sm-12" [(ngModel)]="project.presentation" name="presentation"></p-editor>
+          </div>
+        </div>
+        <h2>Contact et liens</h2>
+        <small class="form-text text-muted">
+          Les moyens de contact et les liens liés au projet.
+        </small>
+        <div class="w3-padding w3-border w3-hover-border-orange w3-round-xlarge w3-animate-bottom">
+          <div
+            [ngClass]="{
+              'form-group row': true,
+              'has-danger': !contactmail.valid && !contactmail.pristine,
+              'has-success' : contactmail.valid
+            }">
+
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="email">
+              Email de contact*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-at"></i>
+                </span>
+                <input pattern="^.{3,}@.{3,}\.[a-z]{2,4}$" id="contactmail"
+                  name="contactmail" [(ngModel)]="project.contactmail"
+                  required #contactmail="ngModel" type="email"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': !contactmail.valid && !contactmail.pristine,
+                    'form-control-success' : contactmail.valid
+                  }" placeholder="Email de contact"
+                  aria-describedby="basic-addon1">
+              </div>
+              <div *ngIf="!contactmail.valid && !contactmail.pristine"
+                class="form-control-feedback">
+                Email invalide
+              </div>
+              <small id="fileHelp" class="form-text text-muted">
+                L'adresse mail que les utilisateurs utiliseront pour vous contacter.
+              </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="email">
+              Lien Facebook
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-facebook"></i>
+                </span>
+                <input id="fblink" name="fblink" [(ngModel)]="project.fblink" type="text" class="form-control" placeholder="Lien Facebook" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="email">
+              Lien Twitter
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-twitter"></i>
+                </span>
+                <input id="twtlink" name="twtlink" [(ngModel)]="project.twtlink" type="text" class="form-control" placeholder="Lien Twitter" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="email">
+              Lien Google +
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-google-plus"></i>
+                </span>
+                <input id="googlelink" name="googlelink" [(ngModel)]="project.googlelink" type="text" class="form-control" placeholder="Lien Google +" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="email">
+              Lien Paypal
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-eur"></i>
+                </span>
+                <input id="paypallink" name="paypallink" [(ngModel)]="project.paypallink" type="text" class="form-control" placeholder="Lien Paypal" aria-describedby="basic-addon1">
+              </div>
+              <small id="paypallinkHelp" class="form-text text-muted">
+                Le compte paypal vers lequel les dons financiers seront dirigés.
+              </small>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!projectForm.valid" class="form-group has-danger">
+          <div class="form-control-feedback">
+            Formulaire invalide, vérifiez les champs requis.
+          </div>
+        </div>
+        <small id="formHelp" class="form-text text-muted">
+          * Champ requis.
+        </small>
+        <br />
+        <div class="form-group row center">
+          <input type="submit" [disabled]="!projectForm.valid" class="btn btn-primary full-width" value="Soumettre le projet" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,233 @@
+<div class="content w3-animate-bottom">
+  <div class="container-fluid">
+    <h1>
+      Créer une association
+      <a href="/admin-associations" class="btn">
+        <i class="fa fa-chevron-left"></i>
+         Retour
+      </a>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <form novalidate #assoForm="ngForm">
+        <h2>
+          Informations sur l'association
+        </h2>
+        <div class=
+          "w3-padding w3-border
+          w3-hover-border-orange w3-round-xlarge
+          w3-animate-bottom">
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!name.valid && !name.pristine),
+            'has-success' : name.valid
+          }">
+            <div class="col-1"></div>
+            <label for="name" class="col-2 col-form-label">
+              Nom de l'association
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <input pattern="^.{2,}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!name.valid && !name.pristine),
+                    'form-control-success' : name.valid
+                  }"
+                  type="text" placeholder="Nom de l'association"
+                  [(ngModel)]="asso.name" name="name" id="name"
+                  required #name="ngModel">
+              </div>
+              <div *ngIf="!name.valid && !name.pristine"
+                class="form-control-feedback">
+                Nom invalide
+              </div>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!email.valid && !email.pristine),
+            'has-success' : email.valid
+          }">
+            <div class="col-1"></div>
+            <label for="email" class="col-2 col-form-label">
+              Email
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-at fa-fw"></i>
+                </span>
+                <input pattern="^.{3,}@.{3,}\.[a-z]{2,4}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!email.valid && !email.pristine),
+                    'form-control-success' : email.valid
+                  }"
+                  type="email" placeholder="Email"
+                  [(ngModel)]="asso.email" name="email" id="email"
+                  required #email="ngModel">
+              </div>
+              <div *ngIf="!email.valid && !email.pristine"
+                class="form-control-feedback">
+                Email invalide
+              </div>
+              <div *ngIf="!(!email.valid && !email.pristine) && emailExists"
+                class="form-control-feedback">
+                Cet email existe déjà
+              </div>
+              <small id="emailHelp" class="form-text text-muted">
+                Email public.
+              </small>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!image.valid && !image.pristine) ,
+            'has-success' : image.valid
+          }">
+            <div class="col-1"></div>
+            <label for="image" class="col-2 col-form-label">
+              Logo de l'association
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+
+                <input pattern="^.{20,}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!image.valid && !image.pristine),
+                    'form-control-success' : image.valid
+                  }"
+                  type="text" placeholder="Lien de l'image : http://"
+                  [(ngModel)]="asso.image" name="image" id="image"
+                  required #image="ngModel">
+                  <span class="input-group-addon" id="basic-addon1">
+                    <i class="fa fa-picture-o fa-fw"></i>
+                  </span>
+              </div>
+              <div *ngIf="!image.valid && !image.pristine"
+                class="form-control-feedback">
+                Lien invalide
+              </div>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!url.valid && !url.pristine) ,
+            'has-success' : url.valid
+          }">
+            <div class="col-1"></div>
+            <label for="url" class="col-2 col-form-label">
+              Lien du site de l'association
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-picture-o fa-fw"></i>
+                </span>
+                <input pattern="^.{20,}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!url.valid && !url.pristine),
+                    'form-control-success' : url.valid
+                  }"
+                  type="text" placeholder="Lien du site : http://"
+                  [(ngModel)]="asso.url" name="url" id="url"
+                  required #url="ngModel">
+              </div>
+              <div *ngIf="!url.valid && !url.pristine"
+                class="form-control-feedback">
+                Lien invalide
+              </div>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!desc.valid && !desc.pristine) ,
+            'has-success' : desc.valid
+          }">
+            <div class="col-1"></div>
+            <label for="url" class="col-2 col-form-label">
+              Description
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <textarea pattern="^.{20,}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!desc.valid && !desc.pristine),
+                    'form-control-success' : desc.valid
+                  }"
+                  type="text" placeholder="Décrivez l'association"
+                  [(ngModel)]="asso.desc" name="desc" id="desc"
+                  required #desc="ngModel"></textarea>
+              </div>
+              <div *ngIf="!url.valid && !url.pristine"
+                class="form-control-feedback">
+                Description invalide
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>Réseaux sociaux</h2>
+        <small class="form-text text-muted">
+          Les liens des pages de votre association sur les réseaux sociaux.
+        </small>
+        <div class="w3-padding w3-border w3-hover-border-orange w3-round-xlarge w3-animate-bottom">
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="fburl">
+              Lien Facebook
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-facebook"></i>
+                </span>
+                <input id="fburl" name="fburl" [(ngModel)]="asso.fburl" type="text" class="form-control" placeholder="Lien Facebook" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="twturl">
+              Lien Twitter
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-twitter"></i>
+                </span>
+                <input id="twturl" name="twturl" [(ngModel)]="asso.twturl" type="text" class="form-control" placeholder="Lien Twitter" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="googleurl">
+              Lien Google +
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-fw fa-google-plus"></i>
+                </span>
+                <input id="googleurl" name="googleurl" [(ngModel)]="asso.googleurl" type="text" class="form-control" placeholder="Lien Google +" aria-describedby="basic-addon1">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!assoForm.valid" class="form-group has-danger">
+          <div class="form-control-feedback">
+            Formulaire invalide.
+          </div>
+        </div>
+        <div class="form-group row center">
+          <button (click)="onSubmit()" [disabled]="!assoForm.valid" type="submit" class="btn btn-primary full-width" id="submit"><i class="fa fa-plus"></i> Créer</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

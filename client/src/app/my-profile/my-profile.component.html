@@ -1,0 +1,224 @@
+
+<div class="content w3-animate-bottom">
+  <div class="container-fluid">
+    <h1>
+      Votre compte
+      <a href="/home" class="btn">
+        <i class="fa fa-home"></i>
+         Accueil
+      </a>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <form novalidate #userForm="ngForm">
+        <h2>
+          Informations de connexion
+        </h2>
+        <div class=
+          "w3-padding w3-border
+          w3-hover-border-orange w3-round-xlarge
+          w3-animate-bottom">
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!email.valid && !email.pristine) || emailExists,
+            'has-success' : email.valid && !emailExists
+          }">
+            <div class="col-1"></div>
+            <label for="email" class="col-2 col-form-label">
+              Email
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-at fa-fw"></i>
+                </span>
+                <input pattern="^.{3,}@.{3,}\.[a-z]{2,4}$"
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!email.valid && !email.pristine) || emailExists,
+                    'form-control-success' : email.valid && !emailExists
+                  }"
+                  type="email" placeholder="Email"
+                  [(ngModel)]="user.email" name="email" id="email"
+                  required #email="ngModel">
+              </div>
+              <div *ngIf="!email.valid && !email.pristine"
+                class="form-control-feedback">
+                Email invalide
+              </div>
+              <div *ngIf="!(!email.valid && !email.pristine) && emailExists"
+                class="form-control-feedback">
+                Cet email existe déjà
+              </div>
+              <small id="emailHelp" class="form-text text-muted">
+                Nous ne la communiquerons à personne sans votre accord.
+              </small>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true}">
+            <div class="col-1"></div>
+            <label for="password" class="col-2 col-form-label">
+              Mot de passe
+            </label>
+            <div class="col-7">
+              <div class="w3-center">
+                ********
+              </div>
+            </div>
+            <div class="col-1">
+              <button [routerLink]="['/change-password']" class="btn btn-primary"><i class="fa fa-edit"></i></button>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': (!username.valid && !username.pristine) || usernameExists,
+            'has-success' : !usernameExists && username.valid
+            }">
+            <div class="col-1"></div>
+            <label for="username" class="col-2 col-form-label">
+              Pseudo
+            </label>
+            <div class="col-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">
+                  <i class="fa fa-user fa-fw"></i>
+                </span>
+                <input
+                  pattern="^[a-zA-Z0-9\-\_ ]{4,20}$"
+                  type="text" required
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': (!username.valid && !username.pristine) || usernameExists,
+                    'form-control-success' : !usernameExists && username.valid
+                  }" [(ngModel)]="user.username"
+                  placeholder="Pseudo" id="username"
+                  name="username" #username="ngModel">
+              </div>
+              <div *ngIf="!username.valid && !username.pristine"
+                class="form-control-feedback">
+                Pseudo invalide
+              </div>
+              <div *ngIf="!(!username.valid && !username.pristine) && usernameExists"
+                class="form-control-feedback">
+                Ce pseudo existe déjà
+              </div>
+              <small id="usernameHelp" class="form-text text-muted">
+                Choisissez un pseudo (4-20 caractères).
+              </small>
+            </div>
+          </div>
+        </div>
+        <h2>
+          Vos informations
+        </h2>
+        <small class="form-text text-muted">
+          Ces informations sont confidentielles.
+        </small>
+        <div class=
+          "w3-padding w3-border w3-hover-border-orange
+          w3-round-xlarge w3-animate-bottom">
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !lastname.valid && !lastname.pristine,
+            'has-success' : lastname.valid}">
+            <div class="col-1"></div>
+            <label for="lastname" class="col-2 col-form-label">
+              Nom de famille
+            </label>
+            <div class="col-8">
+              <input [ngClass]="{
+                'form-control': true,
+                'form-control-danger': !lastname.valid && !lastname.pristine,
+                'form-control-success' : lastname.valid
+                }" pattern="^[a-zA-Z\- ]{2,20}$"
+                type="text" placeholder="Nom de famille"
+                id="lastname" name="lastname" [(ngModel)]="user.lastname"
+                required #lastname="ngModel">
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !firstname.valid && !firstname.pristine,
+            'has-success' : firstname.valid}">
+            <div class="col-1"></div>
+            <label for="firstname" class="col-2 col-form-label">
+              Prénom
+            </label>
+            <div class="col-8">
+              <input [ngClass]="{
+                'form-control': true,
+                'form-control-danger': !firstname.valid && !firstname.pristine,
+                'form-control-success' : firstname.valid
+                }" pattern="^[a-zA-Z\- ]{2,20}$"
+                type="text" name="firstname"
+                [(ngModel)]="user.firstname" required
+                placeholder="Prénom" id="firstname" #firstname="ngModel">
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true,
+            'has-danger': !phone.valid && !phone.pristine,
+            'has-success' : phone.valid}">
+            <div class="col-1"></div>
+            <label for="phone" class="col-2 col-form-label">Télephone</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  +33
+                </div>
+                <input [ngClass]="{
+                    'form-control': true,
+                    'form-control-danger': !phone.valid && !phone.pristine,
+                    'form-control-success' : phone.valid
+                  }" type="phone" placeholder="Télephone"
+                  id="phone" name="phone" [(ngModel)]="user.phone" #phone="ngModel"
+                  required pattern="^\d{9}$">
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>
+          Votre profil
+        </h2>
+        <small class="form-text text-muted">
+          Vos informations publiques.
+        </small>
+        <div class=
+          "w3-padding w3-border w3-hover-border-orange
+          w3-round-xlarge w3-animate-bottom">
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label for="lastname" class="col-2 col-form-label">
+              Avatar
+            </label>
+            <div class="col-8">
+              <input class="form-control"
+                type="text" placeholder="Lien d'image"
+                id="avatar" name="avatar" [(ngModel)]="user.avatar">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-1"></div>
+            <label for="lastname" class="col-2 col-form-label">
+              Description
+            </label>
+            <div class="col-8">
+              <textarea class="form-control" placeholder="Décrivez-vous"
+                id="desc" name="desc" [(ngModel)]="user.desc"></textarea>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div *ngIf="!userForm.valid" class="form-group has-danger">
+          <div class="form-control-feedback">
+            Formulaire invalide.
+          </div>
+        </div>
+        <div class="form-group row center">
+          <button (click)="onSubmit()" [disabled]="!userForm.valid" type="submit" class="btn btn-primary full-width" id="submit">Modifier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

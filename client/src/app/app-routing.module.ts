@@ -6,15 +6,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
 import { ContactComponent } from './contact/contact.component';
+import { ActusComponent } from './actus/actus.component';
+import { ProjectCreateComponent } from './project-create/project-create.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { AdminAssociationsComponent } from './admin-associations/admin-associations.component';
+import { FailedAuthComponent } from './failed-auth/failed-auth.component';
+import { AssociationCreateComponent } from './association-create/association-create.component';
 
 //Gestion des routes et des redirections
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'projects', component: ProjectsComponent },
-  { path: 'contact', component: ContactComponent }
+  { path: 'project-create', component: ProjectCreateComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'actus', component: ActusComponent },
+  { path: 'my-profile', component: MyProfileComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'admin-users', component: AdminUsersComponent },
+  { path: 'admin-associations', component: AdminAssociationsComponent },
+  { path: 'association-create', component: AssociationCreateComponent },
+  { path: 'failed-auth', component: FailedAuthComponent }
 ];
 
 //Déclaration du module de routing

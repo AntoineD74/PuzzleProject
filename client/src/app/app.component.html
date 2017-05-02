@@ -1,75 +1,166 @@
 <!--
   La navbar en haut de la page
 -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="home">Puzzle Project</a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="home">Accueil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Actualités</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="projects">Projets</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="contact">Contact</a>
-      </li>
-    </ul>
-    <span class="fill-remaining-space"></span>
-    <ul class="navbar-nav">
-      <li class="nav-item dropdown">
-        <a class="btn dropdown-toggle nav-dropdown-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Compte
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">S'inscrire</a>
-          <a class="dropdown-item" href="signin">Se connecter</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="row">
+  <nav class="navbar navbar-toggleable-md fixed-top" >
 
-<router-outlet></router-outlet>
+    <div class="col-md-8 col-sm-12 offset-md-2">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="home">Puzzle Project</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="home">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="actus" hidden>Actualités</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="projects">Projets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Associations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">Contact</a>
+          </li>
+        </ul>
+        <span class="fill-remaining-space"></span>
+        <ul class="navbar-nav">
+          <li *ngIf="!isLoggedIn" class="nav-item dropdown">
+            <a class="btn dropdown-toggle nav-dropdown-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user-circle-o"></i> Compte
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="signup"><i class="fa fa-user-plus fa-fw"></i> S'inscrire</a>
+              <a class="dropdown-item" href="signin"><i class="fa fa-sign-in fa-fw"></i> Se connecter</a>
+            </div>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item dropdown">
+            <a class="btn dropdown-toggle nav-dropdown-btn" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user-circle-o"></i> Bienvenue, {{username}} !
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Se déconnecter</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+  </nav>
+</div>
+
+<p-growl [value]="msgs"></p-growl>
+
+<div class="row" [style]="{'margin-top':'35px!important'}">
+  <div *ngIf="isLoggedIn" class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" >
+    <p-accordion class="card">
+      <p-accordionTab *ngIf="admin" header="Administration">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item" >
+            <a class="nav-link" href="/admin-users">Utilisateurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin-associations">Associations</a>
+          </li>
+        </ul>
+      </p-accordionTab>
+      <p-accordionTab *ngIf="moderator" header="Modération">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item active" >
+            <a class="nav-link" href="#">Projets</a>
+          </li>
+          <li class="nav-item">
+        </ul>
+      </p-accordionTab>
+      <p-accordionTab header="Mon compte">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item active" >
+            <a class="nav-link" href="my-profile">Mon profil <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </p-accordionTab>
+      <p-accordionTab header="Mes associations">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item active" >
+            <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </p-accordionTab>
+      <p-accordionTab header="Mes projets">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item active" >
+            <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </p-accordionTab>
+    </p-accordion>
+
+  </div>
+  <div class="col-sm-12 offset-md-2 col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
 
 <!--
   Le footer en bas de page
 -->
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <span class="text-muted">Powered by Puzzle Project &copy;</span>
+<div class="row">
+  <div class="col-md-8 col-sm-12 offset-md-2">
+    <footer class="footer">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 w3-center">
+            <span class="text-muted">Powered by Puzzle Project &copy;</span>
+          </div>
+          <div class="col-md-6 col-md-offset-6 w3-center">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <span class="text-muted">
+                  Partager la plateforme !
+                </span>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                <span class="footer-icon">
+                  <button class="btn btn-circle">
+                    <a class="fa fa-facebook"></a>
+                  </button>
+                </span>
+                <span class="footer-icon">
+                  <button class="btn btn-circle">
+                    <i class="fa fa-google-plus"></i>
+                  </button>
+                </span>
+                <span class="footer-icon">
+                  <button class="btn btn-circle">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-3">
+            <a class="text-muted" href="home">Accueil</a>
+          </div>
+          <div class="col-md-3">
+            <a class="text-muted" href="actus">Actualités</a>
+          </div>
+          <div class="col-md-3">
+            <a class="text-muted" href="projects">Projets</a>
+          </div>
+          <div class="col-md-3">
+            <a class="text-muted" href="contact">Contact</a>
+          </div>
+        </div>
       </div>
-
-      <div class="col-6">
-        <span class="footer-icon">
-        <button class="btn btn-circle">
-          <i class="fa fa-gratipay"></i>
-        </button>
-      </span>
-        <span class="footer-icon">
-          <button class="btn btn-circle">
-            <a class="fa fa-facebook"></a>
-          </button>
-        </span>
-        <span class="footer-icon">
-          <button class="btn btn-circle">
-            <i class="fa fa-google-plus"></i>
-          </button>
-        </span>
-        <span class="footer-icon">
-          <button class="btn btn-circle">
-            <i class="fa fa-twitter"></i>
-          </button>
-        </span>
-      </div>
-    </div>
+    </footer>
   </div>
-</footer>
+</div>

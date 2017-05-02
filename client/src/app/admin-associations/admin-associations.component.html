@@ -1,0 +1,98 @@
+<div class="content w3-animate-bottom">
+  <div class="container-fluid">
+    <h1>
+      Gestion des associations
+      <a href="/home" class="btn">
+        <i class="fa fa-home"></i>
+         Accueil
+      </a>
+      <button [routerLink]="['/association-create']" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une association</button>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <p-accordion class="card filter">
+        <p-accordionTab header="Filtrer">
+          <div class="row">
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-4">
+                <label for="usernameFilter">Recherche par nom d'association</label>
+              </div>
+              <div class="col-md-6 w3-center">
+                <div class="input-group">
+                  <input name="nameFilter" [(ngModel)]="nameFilter" type="text" class="form-control" />
+                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+              </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-md-6">
+              <button (click)="filter()" class="btn btn-primary full-width"><i class="fa fa-search"></i> Rechercher</button>
+            </div>
+            <div class="col-md-6 ">
+              <button (click)="resetFilter()" class="btn btn-info full-width"><i class="fa fa-refresh"></i> Reset</button>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+
+      <hr />
+
+      <div *ngFor="let asso of assos" class="card user-card w3-hover-border-orange w3-animate-bottom">
+        <div class="row">
+          <div class="col-md-3">
+            <img id="logo" #image class="asso-image" src="{{asso.image}}" />
+          </div>
+          <div class="col-md-9">
+            <h2 class="w3-border-bottom w3-hover-border-orange">{{asso.name}} <button class="btn btn-primary" (click)="deleteAsso(asso.id)"><i class="fa fa-trash-o"></i> Supprimer</button></h2>
+            <div class="row">
+              <div class="col-md-3">
+                Email
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{asso.email}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Lien
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                <a href="{{asso.url}}">{{asso.url}}</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange w3-right-align">
+                <a *ngIf="asso.fburl" href="{{asso.fburl}}"><i class="fa fa-facebook fa-fw"></i></a>
+                  <a *ngIf="asso.twturl" href="{{asso.twturl}}"><i class="fa fa-twitter fa-fw"></i></a>
+                    <a *ngIf="asso.googleurl" href="{{asso.googleurl}}"><i class="fa fa-google-plus fa-fw"></i></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p-accordion>
+              <p-accordionTab header="Description">
+                {{asso.desc}}
+              </p-accordionTab>
+              <p-accordionTab header="Membres">
+                <button class="btn btn-primary">Ajouter un membre</button>
+                <hr />
+                {{asso.desc}}
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
