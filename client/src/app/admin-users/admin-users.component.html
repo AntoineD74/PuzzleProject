@@ -24,6 +24,7 @@
                 </div>
               </div>
           </div>
+          <br />
           <div class="row">
               <div class="col-md-1">
               </div>
@@ -49,7 +50,7 @@
       <hr />
       <div *ngFor="let user of filteredUsers" class="card user-card w3-hover-border-orange w3-animate-bottom">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 w3-center">
             <img id="{{user.id}}" #image (error)="standby(image)" class="avatar-image rounded-circle w3-hover-border-orange" src="{{user.avatar}}" />
           </div>
           <div class="col-md-9">

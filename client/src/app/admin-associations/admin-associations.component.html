@@ -13,17 +13,17 @@
       <p-accordion class="card filter">
         <p-accordionTab header="Filtrer">
           <div class="row">
-              <div class="col-md-1">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-4">
+              <label for="nameFilter">Recherche par nom d'association</label>
+            </div>
+            <div class="col-md-6 w3-center">
+              <div class="input-group">
+                <input name="nameFilter" [(ngModel)]="nameFilter" type="text" class="form-control" />
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
               </div>
-              <div class="col-md-4">
-                <label for="usernameFilter">Recherche par nom d'association</label>
-              </div>
-              <div class="col-md-6 w3-center">
-                <div class="input-group">
-                  <input name="nameFilter" [(ngModel)]="nameFilter" type="text" class="form-control" />
-                  <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                </div>
-              </div>
+            </div>
           </div>
           <br />
           <div class="row">
@@ -39,13 +39,13 @@
 
       <hr />
 
-      <div *ngFor="let asso of assos" class="card user-card w3-hover-border-orange w3-animate-bottom">
+      <div *ngFor="let asso of filteredAssos" class="card user-card w3-hover-border-orange w3-animate-bottom">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 w3-center">
             <img id="logo" #image class="asso-image" src="{{asso.image}}" />
           </div>
           <div class="col-md-9">
-            <h2 class="w3-border-bottom w3-hover-border-orange">{{asso.name}} <button class="btn btn-primary" (click)="deleteAsso(asso.id)"><i class="fa fa-trash-o"></i> Supprimer</button></h2>
+            <h2 class="w3-border-bottom w3-hover-border-orange">{{asso.name}} <button class="btn btn-primary btn-circle" (click)="deleteAsso(asso.id)"><i class="fa fa-trash-o"></i></button></h2>
             <div class="row">
               <div class="col-md-3">
                 Email
@@ -68,8 +68,8 @@
               </div>
               <div class="col-md-8 w3-border-left w3-hover-border-orange w3-right-align">
                 <a *ngIf="asso.fburl" href="{{asso.fburl}}"><i class="fa fa-facebook fa-fw"></i></a>
-                  <a *ngIf="asso.twturl" href="{{asso.twturl}}"><i class="fa fa-twitter fa-fw"></i></a>
-                    <a *ngIf="asso.googleurl" href="{{asso.googleurl}}"><i class="fa fa-google-plus fa-fw"></i></a>
+                <a *ngIf="asso.twturl" href="{{asso.twturl}}"><i class="fa fa-twitter fa-fw"></i></a>
+                <a *ngIf="asso.googleurl" href="{{asso.googleurl}}"><i class="fa fa-google-plus fa-fw"></i></a>
               </div>
             </div>
 
@@ -82,9 +82,35 @@
                 {{asso.desc}}
               </p-accordionTab>
               <p-accordionTab header="Membres">
-                <button class="btn btn-primary">Ajouter un membre</button>
+                <button (click)="addMember(asso)" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter un membre</button>
+                <br />
+                <p>
+                    Total : {{asso.users.length}} membres
+                </p>
                 <hr />
-                {{asso.desc}}
+
+                <div class="row w3-center">
+                  <div *ngFor="let user of asso.users" class="col-md-3">
+                    <div class="card margin-5">
+                      <div class="row">
+                        <div class="col-md-12 w3-right-align">
+                          <button (click)="removeMember(asso, user)" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
+                        </div>
+                        <div class="col-md-12 w3-center">
+                          <img id="avatar" #image (error)="standby(image)" class="avatar-mini-image rounded-circle w3-hover-border-orange" src="{{user.avatar}}" />
+                        </div>
+                        <div class="col-md-12 w3-center">
+                          <h3>{{user.username}}</h3>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div *ngIf="asso.users.length == 0" class="alert alert-info full-width" role="alert">
+                    <strong><i class="fa fa-info-circle"></i> Aucun membre dans cette association !</strong> Ajoutez des membres.
+
+                  </div>
+                </div>
               </p-accordionTab>
             </p-accordion>
           </div>

@@ -173,8 +173,18 @@ ngb-accordion .card-header{
 }
 
 .avatar-image{
-  width:100%;
-  height:auto;
+  width:auto;
+  height:150px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: 1px solid #e7e7e7;
+}
+
+.avatar-mini-image{
+  width:auto;
+  height:110px;
   margin-bottom: 5px;
   margin-top: 5px;
   margin-left: 5px;
@@ -183,8 +193,17 @@ ngb-accordion .card-header{
 }
 
 .asso-image{
-  width:100%;
-  height:auto;
+  width:auto;
+  height:150px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.asso-mini-image{
+  width:auto;
+  height:100px;
   margin-bottom: 5px;
   margin-top: 5px;
   margin-left: 5px;
@@ -209,10 +228,6 @@ body .ui-accordion .ui-accordion-header.ui-state-active span,
   color : #ffffff!important;
 }
 
-.btn {
-    color: #FF9800;
-    text-decoration: none;
-}
 
 .btn-primary {
     color: rgb(255, 255, 255);
@@ -247,4 +262,19 @@ body .ui-accordion .ui-accordion-header.ui-state-active span,
 .btn-primary.disabled, .btn-primary:disabled {
     background-color: #EF6C00;
     border-color: #EF6C00;
+}
+
+.ui-autocomplete {
+  width: 100% !important;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+
+.margin-5{
+  margin: 5px;
 }

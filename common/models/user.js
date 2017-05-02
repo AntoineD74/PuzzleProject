@@ -11,7 +11,7 @@ module.exports = function(User) {
         realm: false,
         emailVerified: false
       },
-      include: 'roles'
+      include: ['roles','associations']
     }, cb);
   };
 
@@ -43,7 +43,7 @@ module.exports = function(User) {
             }
             return cb(null, true);
           });
-        }else{          
+        }else{
           return cb(null,true);
         }
       });

@@ -5,7 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditorModule, SharedModule, GrowlModule, AccordionModule, MultiSelectModule, SelectButtonModule } from 'primeng/primeng';
+import { EditorModule, SharedModule,
+  GrowlModule, AccordionModule,
+  MultiSelectModule, SelectButtonModule,
+  AutoCompleteModule } from 'primeng/primeng';
 
 //Imports des composants perso
 import { AppRoutingModule }     from './app-routing.module';
@@ -32,6 +35,7 @@ import { AdminAssociationsComponent } from './admin-associations/admin-associati
 import { FailedAuthComponent } from './failed-auth/failed-auth.component';
 import { AssociationCreateComponent } from './association-create/association-create.component';
 import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.component';
+import { AddAssMemberDialogComponent } from './add-ass-member-dialog/add-ass-member-dialog.component';
 
 
 //Déclaration du module
@@ -54,7 +58,8 @@ import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.componen
     AdminAssociationsComponent,
     FailedAuthComponent,
     AssociationCreateComponent,
-    ComfirmDialogComponent
+    ComfirmDialogComponent,
+    AddAssMemberDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.componen
     GrowlModule,
     AccordionModule,
     MultiSelectModule,
-    SelectButtonModule
+    SelectButtonModule,
+    AutoCompleteModule
   ],
   providers: [
     AuthenticationService,
@@ -77,7 +83,8 @@ import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.componen
     AdminService
   ],
   entryComponents : [
-    ComfirmDialogComponent
+    ComfirmDialogComponent,
+    AddAssMemberDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -85,7 +85,7 @@
           </li>
         </ul>
       </p-accordionTab>
-      <p-accordionTab header="Mes associations">
+      <p-accordionTab *ngIf="associations" header="Mes associations">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item active" >
             <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a>

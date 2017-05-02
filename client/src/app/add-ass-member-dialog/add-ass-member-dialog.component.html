@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h4 class="modal-title">Ajouter un membre</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  <div class="modal-body">
+    <h5>Association</h5>
+    <hr />
+    <div class="card user-card w3-hover-border-orange">
+      <div class="row">
+        <div class="col-md-3 w3-center">
+          <img id="logo" #image class="asso-mini-image" src="{{asso.image}}" />
+        </div>
+        <div class="col-md-9">
+          <h2 class="w3-border-bottom w3-hover-border-orange">{{asso.name}}</h2>
+          <div class="row">
+            <div class="col-md-3">
+              Email
+            </div>
+            <div class="col-md-8 w3-border-left w3-hover-border-orange">
+              {{asso.email}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              Lien
+            </div>
+            <div class="col-md-8 w3-border-left w3-hover-border-orange">
+              <a href="{{asso.url}}">{{asso.url}}</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-8 w3-border-left w3-hover-border-orange w3-right-align">
+              <a *ngIf="asso.fburl" href="{{asso.fburl}}"><i class="fa fa-facebook fa-fw"></i></a>
+                <a *ngIf="asso.twturl" href="{{asso.twturl}}"><i class="fa fa-twitter fa-fw"></i></a>
+                  <a *ngIf="asso.googleurl" href="{{asso.googleurl}}"><i class="fa fa-google-plus fa-fw"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <br />
+    <h5>Utilisateur</h5>
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+        <label>Nom d'utilisateur</label>
+      </div>
+      <div class="col-md-8">
+        <p-autoComplete class="full-width" [(ngModel)]="userFilter" [suggestions]="filteredUsers" (onSelect)="onSelect()" (completeMethod)="filter($event)" field="username"></p-autoComplete>
+
+      </div>
+
+    </div>
+      <div *ngIf="isSelected()" class="card user-card w3-hover-border-orange">
+        <div class="row">
+          <div class="col-md-3 w3-center">
+            <img id="avatar" #image (error)="standby(image)" class="avatar-mini-image rounded-circle w3-hover-border-orange" src="{{userFilter.avatar}}" />
+          </div>
+          <div class="col-md-9">
+            <h2 class="w3-border-bottom w3-hover-border-orange">{{userFilter.username}}</h2>
+            <div class="row">
+              <div class="col-md-3">
+                Nom
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{userFilter.lastname}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Prénom
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{userFilter.firstname}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                Email
+              </div>
+              <div class="col-md-8 w3-border-left w3-hover-border-orange">
+                {{userFilter.email}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-primary" [disabled]="!isSelected()" (click)="comfirm(userFilter.id, asso.id)">Ajouter</button>
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Annuler</button>
+</div>

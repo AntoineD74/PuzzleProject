@@ -7,6 +7,7 @@ import { AdminService } from '../admin.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { ComfirmDialogComponent } from '../comfirm-dialog/comfirm-dialog.component';
+import { AddAssMemberDialogComponent } from '../add-ass-member-dialog/add-ass-member-dialog.component';
 
 @Component({
   moduleId: module.id,
@@ -24,10 +25,8 @@ export class AdminAssociationsComponent implements OnInit {
   ) { }
 
   assos = [];
-
-  users = [];
-  filteredUsers = [];
-  userFilter = "";
+  filteredAssos = [];
+  nameFilter = "";
 
   ngOnInit() {
     console.log("Admin Associations Init");
@@ -35,28 +34,6 @@ export class AdminAssociationsComponent implements OnInit {
     let that = this;
     if(this.AuthService.checkAuth(this.AuthService.isAdmin())){
       this.getAssos();
-      console.log("Getting Users");
-      this.AdminService.getUsers("&filter[include]=roles")
-        .subscribe(
-          function(response){
-            console.log("Getting Users Response");
-            console.log(response.json());
-            that.users = response.json();
-            for(let user in that.users){
-              if(that.users[user].roles.length > 0){
-                that.users[user].role = that.users[user].roles[0].id;
-              }else{
-                that.users[user].role = 3;
-              }
-            }
-            console.log(that.users);
-            that.filteredUsers = that.users;
-          },
-          function(error){
-            console.log("Getting Users Error");
-            that.GrowlService.pushMessage({severity:'error',summary:'Erreur lors du chargement des utilisateurs', detail:''})
-          }
-        );
     }
   }
 
@@ -67,6 +44,7 @@ export class AdminAssociationsComponent implements OnInit {
         function(response){
           console.log(response);
           that.assos = response.json();
+          that.filter();
         },
         function(error){
           console.log(error);
@@ -81,7 +59,7 @@ export class AdminAssociationsComponent implements OnInit {
       this.AdminService.deleteAsso(id)
         .subscribe(
           function(response){
-            that.GrowlService.pushMessage({severity:'success',summary:'Association supprimée', detail:''})
+            that.GrowlService.pushMessage({severity:'success',summary:'Association supprimée', detail:''});
             that.getAssos();
           },
           function(error){
@@ -91,6 +69,66 @@ export class AdminAssociationsComponent implements OnInit {
     }, (reason) => {
 
     });
+  }
+
+  addMember(asso){
+    let that = this;
+    const modalRef = this.modalService.open(AddAssMemberDialogComponent);
+    modalRef.componentInstance.asso = asso;
+    modalRef.result.then((result) => {
+      this.AdminService.addMember(result.userId, result.assoId)
+        .subscribe(
+          function(response){
+            that.GrowlService.pushMessage({severity:'success',summary:'Membre ajouté', detail:''});
+            asso.users.push(result.user);
+          },
+          function(error){
+            that.GrowlService.pushMessage({severity:'error',summary:"Erreur lors de l'ajout d'un membre", detail:''})
+          }
+        );
+    },
+    (reason) => {
+
+    });
+  }
+
+  standby(image) {
+      image.src = 'https://www.mautic.org/media/images/default_avatar.png'
+  }
+
+  removeMember(asso, user){
+    let that = this;
+    this.modalService.open(ComfirmDialogComponent).result.then((result) => {
+      this.AdminService.removeMember(user.id, asso.id)
+        .subscribe(
+          function(response){
+            that.GrowlService.pushMessage({severity:'success',summary:'Membre supprimé', detail:''});
+            let id = asso.users.indexOf(user);
+            if (id > -1) {
+              asso.users.splice(id, 1);
+            }
+          },
+          function(error){
+            that.GrowlService.pushMessage({severity:'error',summary:"Erreur lors de la suppression du membre", detail:''})
+          }
+        )
+    }, (reason) => {
+
+    });
+  }
+
+  filter(){
+    this.filteredAssos = [];
+    for(let i in this.assos){
+      if(this.assos[i].name.match(this.nameFilter)){
+        this.filteredAssos.push(this.assos[i]);
+      }
+    }
+  }
+
+  resetFilter(){
+    this.nameFilter = "";
+    this.filter();
   }
 
 }

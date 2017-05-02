@@ -104,7 +104,8 @@ export class AdminService {
 
     let route = 'http://localhost:3000/api/associations'+
       '?access_token='+
-      this.Auth.getAccessToken();
+      this.Auth.getAccessToken()+
+      '&filter[include]=users';
     return this.http.get(route, {headers : headers});
   }
 
@@ -116,6 +117,29 @@ export class AdminService {
       id+
       '?access_token='+
       this.Auth.getAccessToken();
+    return this.http.delete(route, {headers : headers});
+  }
+
+  addMember(userId, assoId){
+    let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+    let route = 'http://localhost:3000/api/assusers'+
+      '?access_token='+
+      this.Auth.getAccessToken();
+    return this.http.post(route, { userId : userId, assoId : assoId}, {headers : headers});
+  }
+
+  removeMember(userId, assoId){
+    let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+
+    let route = 'http://localhost:3000/api/associations/'+
+      assoId+'/users/rel/'+
+      userId+
+      '?access_token='+
+      this.Auth.getAccessToken();
+      console.log(route);
     return this.http.delete(route, {headers : headers});
   }
 

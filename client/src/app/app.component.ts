@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   msgs = [];
 
   roles = [];
+  associations = [];
 
   username = "";
 
@@ -61,10 +62,12 @@ export class AppComponent implements OnInit {
       this.isLoggedIn = true;
       if(user){
         this.roles = user.user.roles;
+        this.associations = user.user.associations;
         this.username = user.user.username;
       }else{
         this.roles = this.AuthService.getRoles();
         this.username = this.AuthService.getUsername();
+        this.associations = this.AuthService.getAssos();
       }
       this.admin = this.isAdmin();
       this.moderator = this.isModerator();

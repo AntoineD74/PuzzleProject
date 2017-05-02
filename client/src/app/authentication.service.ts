@@ -86,7 +86,6 @@ export class AuthenticationService {
             console.log(that.user);
             this.loggedEvent.emit(that.user);
             localStorage.setItem('currentUser', JSON.stringify({ user: response.json().user, token: token }));
-
           }
         ).subscribe();
 
@@ -123,6 +122,11 @@ export class AuthenticationService {
   getRoles(){
     console.log("Asking for Roles : "+this.user.roles);
     return this.user.roles;
+  }
+
+  getAssos(){
+    console.log("Asking for Associations : "+this.user.associations);
+    return this.user.associations;
   }
 
   isAdmin(){
