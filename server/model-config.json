@@ -90,5 +90,13 @@
   "assusers": {
     "dataSource": "db",
     "public": true
+  },
+  "project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "projectuser": {
+    "dataSource": "db",
+    "public": true
   }
 }

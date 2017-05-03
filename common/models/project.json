@@ -1,0 +1,127 @@
+{
+  "name": "project",
+  "plural": "projects",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "resume": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "goal": {
+      "type": "number"
+    },
+    "place": {
+      "type": "string"
+    },
+    "presentation": {
+      "type": "string",
+      "required": true,
+      "dataType": "text"
+    },
+    "contactmail": {
+      "type": "string",
+      "required": true
+    },
+    "fblink": {
+      "type": "string"
+    },
+    "twtlink": {
+      "type": "string"
+    },
+    "googlelink": {
+      "type": "string"
+    },
+    "paypallink": {
+      "type": "string"
+    },
+    "assoId": {
+      "type": "number",
+      "required": true
+    },
+    "state": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasMany",
+      "model": "user",
+      "foreignKey": "projectId",
+      "through": "projectuser"
+    },
+    "association": {
+      "type": "belongsTo",
+      "model": "association",
+      "foreignKey": "assoId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "assoMember",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "listProjects"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "listModProjects"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "moderator",
+      "permission": "ALLOW",
+      "property": "listModProjects"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "validate"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "moderator",
+      "permission": "ALLOW",
+      "property": "validate"
+    }
+  ],
+  "methods": {}
+}

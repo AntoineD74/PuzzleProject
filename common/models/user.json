@@ -52,6 +52,12 @@
       "model": "association",
       "foreignKey": "userId",
       "through": "assusers"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "userId",
+      "through": "projectuser"
     }
   },
   "acls": [

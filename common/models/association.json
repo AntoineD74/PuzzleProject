@@ -43,6 +43,11 @@
       "model": "user",
       "foreignKey": "assoId",
       "through": "assusers"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "assoId"
     }
   },
   "acls": [
@@ -62,6 +67,12 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "assoMember",
       "permission": "ALLOW"
     }
   ],

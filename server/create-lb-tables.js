@@ -7,7 +7,9 @@ var lbTables = [
   'Role',
   'user',
   'association',
-  'assusers'
+  'assusers',
+  'project',
+  'projectuser'
 ];
 
 ds.automigrate(lbTables, function(er) {

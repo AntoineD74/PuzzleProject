@@ -23,7 +23,7 @@
       "model": "user",
       "foreignKey": "userId"
     },
-    "role": {
+    "association": {
       "type": "belongsTo",
       "model": "association",
       "foreignKey": "assoId"
