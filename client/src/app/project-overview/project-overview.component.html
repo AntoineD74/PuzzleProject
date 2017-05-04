@@ -1,3 +1,98 @@
-<p>
-  project-overview works!
-</p>
+<div class="content w3-animate-bottom">
+  <div class="container-fluid">
+    <h1>
+      {{project.title}}
+      <a href="/home" class="btn">
+        <i class="fa fa-home"></i>
+         Accueil
+      </a>
+    </h1>
+    <hr />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="w3-center">
+              <img class="project-image card-img-top" src="{{project.image}}" />
+            </div>
+            <div class="card-block">
+              <div class="w3-right">
+                <a *ngIf="project.fblink !== ''" href="{{project.fblink}}"><i class="fa fa-facebook"></i></a><a *ngIf="project.twtlink !== ''" href="{{project.twtlink}}"><i class="fa fa-twitter"></i></a>
+                <a *ngIf="project.googlelink !== ''" href="{{project.googlelink}}"><i class="fa fa-google-plus"></i></a>
+              </div>
+              <h4 class="card-title">{{project.resume}}</h4>
+              <hr />
+              <div *ngIf="project.goal > 0" class="row">
+                <div class="col-md-4">
+                  <p class="card-text">
+                    Objectif financier du projet
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <p class="card-text">
+                    {{project.goal}} €
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <p class="card-text">
+                    Lieu du projet
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <p class="card-text">
+                    {{project.place}}
+                  </p>
+                </div>
+              </div>
+              <div *ngIf="project.association" class="row">
+                <div class="col-md-4 col-sm-12">
+                  <p class="card-text">
+                    Association partenaire
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <p class="card-text">
+                    {{project.association.name}}
+                  </p>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-primary"><i class="fa fa-external-link"></i></button>
+                </div>
+              </div>
+              <h4 class="card-title">Présentation du projet</h4>
+              <hr />
+              <p-editor class="readonly" [readOnly]="true" [(ngModel)]="project.presentation"></p-editor>
+              <br />
+              <p>
+                Ce projet vous plait et vous aimeriez qu'il soit mené à bien ? Participez en <a href="">donnant</a>.
+              </p>
+              <h4 class="card-title">Membres</h4>
+              <hr />
+              <div *ngIf="project.users" class="row">
+                <div *ngFor="let user of project.users" class="col-md-3">
+                  <div class="card margin-5">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="w3-center">
+                          <img id="avatar" #image (error)="standby(image)" class="avatar-mini-image rounded-circle w3-hover-border-orange" src="{{user.avatar}}" />
+
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="w3-center">
+                          <h3>{{user.username}}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
