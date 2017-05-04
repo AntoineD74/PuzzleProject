@@ -28,6 +28,8 @@ import { AuthenticationService } from './authentication.service';
 import { UsersService } from './users.service';
 import { GrowlMessagesService } from './growl-messages.service';
 import { AdminService } from './admin.service';
+import { ProjectsService } from './projects.service';
+import { AssociationsService } from './associations.service';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
@@ -36,6 +38,8 @@ import { FailedAuthComponent } from './failed-auth/failed-auth.component';
 import { AssociationCreateComponent } from './association-create/association-create.component';
 import { ComfirmDialogComponent } from './comfirm-dialog/comfirm-dialog.component';
 import { AddAssMemberDialogComponent } from './add-ass-member-dialog/add-ass-member-dialog.component';
+import { AssociationsComponent } from './associations/associations.component';
+import { AssociationOverviewComponent } from './association-overview/association-overview.component';
 
 
 //Déclaration du module
@@ -59,7 +63,9 @@ import { AddAssMemberDialogComponent } from './add-ass-member-dialog/add-ass-mem
     FailedAuthComponent,
     AssociationCreateComponent,
     ComfirmDialogComponent,
-    AddAssMemberDialogComponent
+    AddAssMemberDialogComponent,
+    AssociationsComponent,
+    AssociationOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,9 @@ import { AddAssMemberDialogComponent } from './add-ass-member-dialog/add-ass-mem
     AuthenticationService,
     UsersService,
     GrowlMessagesService,
-    AdminService
+    AdminService,
+    ProjectsService,
+    AssociationsService
   ],
   entryComponents : [
     ComfirmDialogComponent,

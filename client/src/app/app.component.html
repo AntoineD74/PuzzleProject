@@ -21,7 +21,7 @@
             <a class="nav-link" href="projects">Projets</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Associations</a>
+            <a class="nav-link" href="associations">Associations</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact">Contact</a>
@@ -85,17 +85,24 @@
           </li>
         </ul>
       </p-accordionTab>
-      <p-accordionTab *ngIf="associations" header="Mes associations">
+      <p-accordionTab *ngIf="associations.length > 0" header="Mes associations">
         <ul class="nav nav-pills flex-column">
-          <li class="nav-item active" >
-            <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a>
+          <li *ngFor="let asso of associations" class="nav-item active" >
+            <a class="nav-link" routerLink="['/associations']">{{asso.name}}</a>
           </li>
         </ul>
       </p-accordionTab>
       <p-accordionTab header="Mes projets">
+        <div *ngIf="associations.length > 0">
+          <button [routerLink]="['/project-create']" class="btn btn-primary"><i class="fa fa-plus"></i> Créer un projet</button>
+          <hr />
+        </div>
+        <p *ngIf="projects.length == 0">
+          Aucun projet
+        </p>
         <ul class="nav nav-pills flex-column">
-          <li class="nav-item active" >
-            <a class="nav-link" href="#">Overview <span class="sr-only">(current)</span></a>
+          <li *ngFor="let proj of projects" class="nav-item active" >
+            <a class="nav-link" [routerLink]="['/project-overview', proj.id]">{{proj.title}}</a>
           </li>
         </ul>
       </p-accordionTab>

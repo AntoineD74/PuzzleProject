@@ -78,16 +78,36 @@ export class AuthenticationService {
     if (token) {
         // set token property
       this.token = token;
-      this.http.get('http://localhost:3000/api/users/profile?id='+loginResponse.userId)
+      this.http.get('http://localhost:3000/api/users/profile?id='+loginResponse.userId+'&access_token='+token.id)
         .map(
           (response:Response) => {
-            that.user = response.json();
-            console.log("Profile");
+            that.user = response.json().user;
+            console.log("Profile Response");
             console.log(that.user);
-            this.loggedEvent.emit(that.user);
-            localStorage.setItem('currentUser', JSON.stringify({ user: response.json().user, token: token }));
-          }
+        }
         ).subscribe();
+
+        this.http.get('http://localhost:3000/api/users/'+loginResponse.userId+'/associations?access_token='+token.id)
+          .map(
+            (response:Response) => {
+              console.log("Associations Response");
+              console.log(response);
+              that.user.associations = response.json();
+            }
+          ).subscribe();
+
+          this.http.get('http://localhost:3000/api/users/'+loginResponse.userId+'/projects?access_token='+token.id)
+            .map(
+              (response:Response) => {
+                console.log("Projects Response");
+                console.log(response);
+                that.user.projects = response.json();
+                console.log("Profile");
+                console.log(that.user);
+                this.loggedEvent.emit(that.user);
+                localStorage.setItem('currentUser', JSON.stringify({ user: that.user, token: token }));
+              }
+            ).subscribe();
 
       // store username and jwt token in local storage to keep user logged in between page refreshes
 
@@ -127,6 +147,11 @@ export class AuthenticationService {
   getAssos(){
     console.log("Asking for Associations : "+this.user.associations);
     return this.user.associations;
+  }
+
+  getProjects(){
+    console.log("Asking for Projects : "+this.user.projects);
+    return this.user.projects;
   }
 
   isAdmin(){

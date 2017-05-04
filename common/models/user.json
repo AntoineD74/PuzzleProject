@@ -51,7 +51,7 @@
       "type": "hasMany",
       "model": "association",
       "foreignKey": "userId",
-      "through": "assusers"
+      "through": "assuser"
     },
     "projects": {
       "type": "hasMany",

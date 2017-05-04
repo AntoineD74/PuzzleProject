@@ -28,7 +28,7 @@
               Titre du projet*
             </label>
             <div class="col-md-8 col-sm-12">
-              <input id="title" pattern="[a-zA-Z0-9\-\.]{10,}" required name="title"
+              <input id="title" pattern="[a-zA-Z0-9\-\.\ ]{10,}" required name="title"
                 [(ngModel)]="project.title" type="text" placeholder="Titre du projet"
                 [ngClass]="{
                   'form-control': true,
@@ -82,7 +82,7 @@
               Image du projet*
             </label>
             <div class="col-md-8 col-sm-12">
-              <input id="image" pattern="[a-zA-Z0-9\-\.]{10,}" required name="image"
+              <input id="image" pattern=".{10,}" required name="image"
                 [(ngModel)]="project.image" type="text" placeholder="Lien de l'image du projet"
                 [ngClass]="{
                   'form-control': true,
@@ -108,20 +108,17 @@
             </label>
             <div class="col-md-8 col-sm-12">
               <div class="input-group">
-                <input [ngClass]="{
+                <input type="date" [ngClass]="{
                     'form-control': true,
                     'form-control-danger': !date.valid && !date.pristine,
                     'form-control-success' : date.valid
-                  }" ngbDatepicker #d="ngbDatepicker" required
+                  }" required
                   placeholder="Date estimée de réalisation du projet" id="date" name="date"
                   [(ngModel)]="project.date" #date="ngModel">
-                <div class="input-group-addon" (click)="d.toggle()" >
+                <div class="input-group-addon">
                   <i class="fa fa-calendar fa-fw"></i>
                 </div>
               </div>
-              <small id="dateHelp" class="form-text text-muted">
-                Format américain (yyyy-mm-dd).
-              </small>
             </div>
           </div>
           <div [ngClass]="{
@@ -168,6 +165,20 @@
                   class="form-control-feedback">
                   Lieu invalide
                 </div>
+            </div>
+          </div>
+          <div [ngClass]="{
+            'form-group row': true
+          }">
+            <div class="col-1"></div>
+            <label class="col-md-2 col-sm-12 col-form-label" for="title">
+              Association partenaire*
+            </label>
+            <div class="col-md-8 col-sm-12">
+              <select [(ngModel)]="project.assoId" required class="custom-select" name="assoId">
+                <option *ngFor="let asso of associations" value="{{asso.id}}">{{asso.name}}</option>
+              </select>
+
             </div>
           </div>
         </div>
@@ -293,7 +304,7 @@
         </small>
         <br />
         <div class="form-group row center">
-          <input type="submit" [disabled]="!projectForm.valid" class="btn btn-primary full-width" value="Soumettre le projet" />
+          <input (click)="onSubmit()" [disabled]="!projectForm.valid" class="btn btn-primary full-width" value="Soumettre le projet" />
         </div>
       </form>
     </div>

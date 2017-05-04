@@ -1,5 +1,5 @@
 {
-  "name": "assusers",
+  "name": "assuser",
   "plural": "assusers",
   "base": "PersistedModel",
   "idInjection": true,

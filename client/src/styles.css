@@ -1,5 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
+.readonly .ql-toolbar.ql-snow {
+    border: 5px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    padding: 8px;
+    display: none;
+}
+
+.readonly .ql-container.ql-snow {
+     border: 0px;
+     border-top: 1px solid #ccc
+}
+
+.readonly .ql-editor{
+  padding: 0px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
 .fill-remaining-space {
   flex: 1 1 auto;
 }
@@ -90,8 +109,12 @@ body {
   margin:auto;
 }
 
-.full-width{
+.custom-select{
   width: 100%;
+}
+
+.full-width{
+  width: 100%!important;
 }
 
 h1, h2, h3, h4{
@@ -105,6 +128,10 @@ h1, h2, h3, h4{
 
 .margin-20{
   margin: 20px;
+}
+
+.center-filter{
+  margin : 15px!important;
 }
 
 .sidebar{
@@ -277,4 +304,8 @@ body .ui-accordion .ui-accordion-header.ui-state-active span,
 
 .margin-5{
   margin: 5px;
+}
+
+.member-container{
+  overflow-x: scroll;
 }

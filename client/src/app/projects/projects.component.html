@@ -1,18 +1,64 @@
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Les projets</h1>
-    <p class="lead text-muted">Découvrez tous les projets créés par nos associations partenaires.</p>
-    <p>
-      <a href="#" class="btn btn-primary">Main call to action</a>
-      <a href="#" class="btn btn-secondary">Secondary action</a>
-    </p>
+      <h1 class="jumbotron-heading">Les projets</h1>
+      <p class="lead text-muted">Découvrez tous les projets créés par nos associations partenaires.</p>
+      <p>
+        <a href="#" class="btn btn-primary">Main call to action</a>
+        <a href="#" class="btn btn-secondary">Secondary action</a>
+      </p>
+
+
+
   </div>
+
 </section>
+
+<div class="row">
+  <p-accordion class="card filter center-filter full-width" >
+    <p-accordionTab header="Filtrer">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4">
+          <label for="nameFilter">Recherche par titre</label>
+        </div>
+        <div class="col-md-6 w3-center">
+          <div class="input-group">
+            <input name="nameFilter" [(ngModel)]="titleFilter" type="text" class="form-control" />
+            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <button (click)="filter()" class="btn btn-primary full-width"><i class="fa fa-search"></i> Rechercher</button>
+        </div>
+        <div class="col-md-6 ">
+          <button (click)="resetFilter()" class="btn btn-info full-width"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>
 
 <div class="album text-muted">
   <div class="container">
 
     <div class="row">
+      <div *ngFor="let proj of filteredProjects" class="card">
+        <img src="{{proj.image}}" height="200px" width="auto" alt="Card image cap">
+        <h2>{{proj.title}}</h2>
+        <p class="card-text">{{proj.resume}}</p>
+        <div class="w3-right-align">
+          <a *ngIf="proj.fblink !== ''" src="proj.fblink"><i class="fa fa-facebook"></i></a>
+          <a *ngIf="proj.twtlink !== ''" src="proj.twtlink"><i class="fa fa-twitter"></i></a>
+          <a *ngIf="proj.googlelink !== ''" src="proj.googlelink"><i class="fa fa-google-plus"></i></a>
+        </div>
+        <div>
+          <button [routerLink]="['/project-overview', proj.id]" class="btn btn-primary">Détails</button>
+        </div>
+      </div>
       <div class="card">
         <img src="./assets/images/PICT0032_3_2.JPG" height="200px" width="auto" alt="Card image cap">
         <h2>Hamada</h2>
@@ -33,14 +79,6 @@
         <img src="./assets/images/Banka.jpg" height="200px" width="auto" alt="Card image cap">
         <h2>Haut Nkam Nshu Shu:</h2>
         <p class="card-text">Restaurer un réseau d'eau construit il y a 50 ans pour redonner un accès à l'eau potable aux habitants de Banka.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" height="200px" width="auto" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" height="200px" width="auto" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
       </div>
     </div>
 

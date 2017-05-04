@@ -97,6 +97,13 @@
     {
       "accessType": "READ",
       "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "findById"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW",
       "property": "listModProjects"
@@ -121,6 +128,12 @@
       "principalId": "moderator",
       "permission": "ALLOW",
       "property": "validate"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

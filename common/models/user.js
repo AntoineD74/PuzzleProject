@@ -11,7 +11,7 @@ module.exports = function(User) {
         realm: false,
         emailVerified: false
       },
-      include: ['roles','associations']
+      include: ['roles', 'associations']
     }, cb);
   };
 
@@ -19,7 +19,7 @@ module.exports = function(User) {
     accepts: [
       {arg: 'id', type: 'number'}
     ],
-    returns: {arg: 'user', type: 'User'},
+    returns: {arg: 'user', type: 'object'},
     http: {path:'/profile', verb: 'get'}
   });
 

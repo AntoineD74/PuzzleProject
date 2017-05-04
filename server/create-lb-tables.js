@@ -7,7 +7,7 @@ var lbTables = [
   'Role',
   'user',
   'association',
-  'assusers',
+  'assuser',
   'project',
   'projectuser'
 ];
