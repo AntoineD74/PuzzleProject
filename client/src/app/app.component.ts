@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   roles = [];
   associations = [];
-  projects = [];
 
   username = "";
 
@@ -62,15 +61,13 @@ export class AppComponent implements OnInit {
     if(this.AuthService.isLoggedIn() || user != undefined){
       this.isLoggedIn = true;
       if(user){
-        this.roles = user.roles;
-        this.associations = user.associations;
-        this.username = user.username;
-        this.projects = user.projects;
+        this.roles = user.user.roles;
+        this.associations = user.user.associations;
+        this.username = user.user.username;
       }else{
         this.roles = this.AuthService.getRoles();
         this.username = this.AuthService.getUsername();
         this.associations = this.AuthService.getAssos();
-        this.projects = this.AuthService.getProjects();
       }
       this.admin = this.isAdmin();
       this.moderator = this.isModerator();

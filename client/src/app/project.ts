@@ -11,6 +11,5 @@ export class Project {
   twtlink:string="";
   googlelink:string="";
   paypallink:string="";
-  state:number = 1;
-  assoId:string="";
+  state:number = 0;
 }

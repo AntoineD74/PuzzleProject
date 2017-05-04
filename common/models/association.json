@@ -42,7 +42,7 @@
       "type": "hasMany",
       "model": "user",
       "foreignKey": "assoId",
-      "through": "assuser"
+      "through": "assusers"
     },
     "projects": {
       "type": "hasMany",
@@ -72,7 +72,7 @@
     {
       "accessType": "WRITE",
       "principalType": "ROLE",
-      "principalId": "$owner",
+      "principalId": "assoMember",
       "permission": "ALLOW"
     }
   ],

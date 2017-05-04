@@ -87,7 +87,7 @@
     "dataSource": "db",
     "public": true
   },
-  "assuser": {
+  "assusers": {
     "dataSource": "db",
     "public": true
   },

@@ -17,7 +17,7 @@ module.exports = function(app) {
       }
 
       if(context.modelName == 'project'){
-        assuser.count({
+        assusers.count({
           userId: userId
         }, function(err, count){
 
@@ -36,7 +36,7 @@ module.exports = function(app) {
           if(err || !asso){
             return process.nextTick(() => cb(null, false));
           }
-          assuser.count({
+          assusers.count({
             userId: userId,
             assoId: asso.id
           }, function(err, count){
